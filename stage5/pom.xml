@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.stage5</groupId>
+    <artifactId>newsstats</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <packaging>bundle</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20200518</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.gogo.runtime</artifactId>
+            <version>1.1.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.service.component.annotations</artifactId>
+            <version>1.4.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+
+
+        <profile>
+            <id>statcommand</id>
+            <properties>
+                <module>org.stage5.osgi.commands.NewsTopWordsCommand</module>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.felix</groupId>
+                        <artifactId>maven-bundle-plugin</artifactId>
+                        <version>4.2.1</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <finalName>topwords</finalName>
+                            <instructions>
+                                <Bundle-SymbolicName>
+                                    ${module}
+                                </Bundle-SymbolicName>
+                                <Bundle-Name>${module}</Bundle-Name>
+                                <Bundle-Activator>org.stage5.osgi.Activator</Bundle-Activator>
+                                <Bundle-Version>${project.version}</Bundle-Version>
+                                <Import-Package>
+<!--                                    org.stage5.osgi.services,-->
+<!--                                    org.stage5.osgi.commands,-->
+                                    org.osgi.framework,
+<!--                                    org.stage5.osgi.entities,-->
+<!--                                    org.stage5.osgi.data-->
+                                    ${module}
+                                </Import-Package>
+                                <Embed-Dependency>json</Embed-Dependency>
+                                <Export-Package>${module}</Export-Package>
+                                <Service-Component>*</Service-Component>
+                                <_dsannotations>*</_dsannotations>
+                                <!-- Enable processing of OSGI metatype annotations -->
+                                <_metatypeannotations>*</_metatypeannotations>
+                            </instructions>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
