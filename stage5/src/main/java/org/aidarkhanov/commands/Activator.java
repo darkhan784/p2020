@@ -1,6 +1,5 @@
-package org.aidarkhanov;
+package org.aidarkhanov.commands;
 
-import org.aidarkhanov.commands.NewsTopWordsCommand;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 

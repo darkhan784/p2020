@@ -70,7 +70,7 @@
                                     ${module}
                                 </Bundle-SymbolicName>
                                 <Bundle-Name>${module}</Bundle-Name>
-                                <Bundle-Activator>org.aidarkhanov.Activator</Bundle-Activator>
+                                <Bundle-Activator>org.aidarkhanov.commands.Activator</Bundle-Activator>
                                 <Bundle-Version>${project.version}</Bundle-Version>
                                 <Import-Package>
                                     org.osgi.framework,
