@@ -22,7 +22,7 @@
         <profile>
             <id>service</id>
             <properties>
-                <module>org.itmo.helloservice</module>
+                <module>org.aidarkhanov.helloservice</module>
             </properties>
             <build>
                 <plugins>
@@ -44,7 +44,7 @@
                             <finalName>service</finalName>
                             <instructions>
                                 <Bundle-SymbolicName>
-                                    ${project.groupId}.${project.artifactId}.${module}
+                                    ${module}
                                 </Bundle-SymbolicName>
                                 <Bundle-Name>${project.name}.${module}</Bundle-Name>
                                 <Bundle-Version>${project.version}</Bundle-Version>
@@ -57,10 +57,10 @@
                                 </Import-Package>
                                 <Export-Package>
                                     ${module},
-                                    !org.itmo.helloclient
+                                    !org.aidarkhanov.helloclient
                                 </Export-Package>
                                 <Private-Package>
-                                    org.itmo.helloclient
+                                    org.aidarkhanov.helloclient
                                 </Private-Package>
                             </instructions>
                         </configuration>
@@ -71,7 +71,7 @@
         <profile>
             <id>client</id>
             <properties>
-                <module>org.itmo.helloclient</module>
+                <module>org.aidarkhanov.helloclient</module>
             </properties>
             <build>
                 <plugins>
@@ -84,7 +84,7 @@
                             <finalName>client</finalName>
                             <instructions>
                                 <Bundle-SymbolicName>
-                                    ${project.groupId}.${project.artifactId}.${module}
+                                    ${module}
                                 </Bundle-SymbolicName>
                                 <Bundle-Name>${project.name}.${module}</Bundle-Name>
                                 <Bundle-Version>${project.version}</Bundle-Version>
@@ -92,14 +92,14 @@
                                     ${module}.ClientActivator
                                 </Bundle-Activator>
                                 <Import-Package>
-                                    org.itmo.helloservice, org.osgi.framework, ${module}
+                                    org.aidarkhanov.helloservice, org.osgi.framework, ${module}
                                 </Import-Package>
                                 <Export-Package>
                                     ${module},
-                                    !org.itmo.helloservice
+                                    !org.aidarkhanov.helloservice
                                 </Export-Package>
                                 <Private-Package>
-                                    org.itmo.helloservice
+                                    org.aidarkhanov.helloservice
                                 </Private-Package>
                             </instructions>
                         </configuration>

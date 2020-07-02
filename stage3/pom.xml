@@ -40,7 +40,7 @@
         <profile>
             <id>service</id>
             <properties>
-                <module>org.itmo.helloservice</module>
+                <module>org.aidarkhanov.helloservice</module>
             </properties>
             <build>
                 <plugins>
@@ -63,11 +63,8 @@
                                 </Import-Package>
                                 <Export-Package>
                                     ${module},
-                                    !org.itmo.helloclient
+                                    !org.aidarkhanov.helloclient
                                 </Export-Package>
-<!--                                <Private-Package>-->
-<!--                                    org.itmo.helloclient-->
-<!--                                </Private-Package>-->
                                 <Service-Component>*</Service-Component>
                                 <_dsannotations>*</_dsannotations>
                                 <!-- Enable processing of OSGI metatype annotations -->
@@ -82,7 +79,7 @@
         <profile>
             <id>client</id>
             <properties>
-                <module>org.itmo.helloclient</module>
+                <module>org.aidarkhanov.helloclient</module>
             </properties>
             <build>
                 <plugins>
@@ -100,18 +97,17 @@
                                 </Bundle-SymbolicName>
                                 <Bundle-Name>${project.name}.${module}</Bundle-Name>
                                 <Bundle-Version>${project.version}</Bundle-Version>
-
                                 <Import-Package>
-                                    org.itmo.helloservice,
+                                    org.aidarkhanov.helloservice,
                                     org.osgi.framework,
                                     ${module}
                                 </Import-Package>
                                 <Export-Package>
                                     ${module},
-                                    !org.itmo.helloservice
+                                    !org.aidarkhanov.helloservice
                                 </Export-Package>
                                 <Private-Package>
-                                    org.itmo.helloservice
+                                    org.aidarkhanov.helloservice
                                 </Private-Package>
                                 <Service-Component>*</Service-Component>
                                 <_dsannotations>*</_dsannotations>

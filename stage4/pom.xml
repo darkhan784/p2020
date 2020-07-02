@@ -23,17 +23,12 @@
             <version>1.1.2</version>
         </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.osgi</groupId>-->
-        <!--            <artifactId>org.osgi.service.component.annotations</artifactId>-->
-        <!--            <version>1.4.0</version>-->
-        <!--        </dependency>-->
     </dependencies>
     <profiles>
         <profile>
             <id>command</id>
             <properties>
-                <module>org.itmo.command</module>
+                <module>org.aidarkhanov.command</module>
             </properties>
             <build>
                 <plugins>
@@ -70,7 +65,7 @@
                                     ${module}
                                 </Export-Package>
                                 <Private-Package>
-                                    org.itmo.command
+                                    org.aidarkhanov.command
                                 </Private-Package>
                             </instructions>
                         </configuration>

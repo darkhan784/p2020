@@ -50,12 +50,10 @@
     </dependencies>
 
     <profiles>
-
-
         <profile>
             <id>statcommand</id>
             <properties>
-                <module>org.stage5.osgi.commands.NewsTopWordsCommand</module>
+                <module>org.aidarkhanov.commands.NewsTopWordsCommand</module>
                 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             </properties>
             <build>
@@ -72,14 +70,10 @@
                                     ${module}
                                 </Bundle-SymbolicName>
                                 <Bundle-Name>${module}</Bundle-Name>
-                                <Bundle-Activator>org.stage5.osgi.Activator</Bundle-Activator>
+                                <Bundle-Activator>org.aidarkhanov.Activator</Bundle-Activator>
                                 <Bundle-Version>${project.version}</Bundle-Version>
                                 <Import-Package>
-<!--                                    org.stage5.osgi.services,-->
-<!--                                    org.stage5.osgi.commands,-->
                                     org.osgi.framework,
-<!--                                    org.stage5.osgi.entities,-->
-<!--                                    org.stage5.osgi.data-->
                                     ${module}
                                 </Import-Package>
                                 <Embed-Dependency>json</Embed-Dependency>
