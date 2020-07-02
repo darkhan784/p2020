@@ -10,7 +10,6 @@ public class Client {
     @Reference(
             service = Greeting.class,
             cardinality = ReferenceCardinality.MANDATORY,
-            unbind = "unsetGreeting",
             policy = ReferencePolicy.STATIC
     )
     public Greeting greeting;
@@ -21,8 +20,5 @@ public class Client {
         greeting.sayHello();
     }
 
-    protected void unsetGreeting() {
-        this.greeting = null;
-    }
 
 }
