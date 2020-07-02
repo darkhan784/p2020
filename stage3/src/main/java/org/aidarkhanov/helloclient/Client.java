@@ -7,11 +7,7 @@ import org.osgi.service.component.annotations.*;
         immediate = true
 )
 public class Client {
-    @Reference(
-            service = Greeting.class,
-            cardinality = ReferenceCardinality.MANDATORY,
-            policy = ReferencePolicy.STATIC
-    )
+    @Reference
     public Greeting greeting;
 
     @Activate
