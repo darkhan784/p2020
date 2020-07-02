@@ -50,12 +50,10 @@
     </dependencies>
 
     <profiles>
-
-
         <profile>
-            <id>statcommand</id>
+            <id>services</id>
             <properties>
-                <module>org.aidarkhanov.commands.NewsTopWordsCommand</module>
+                <module>org.aidarkhanov.services</module>
                 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             </properties>
             <build>
@@ -63,10 +61,49 @@
                     <plugin>
                         <groupId>org.apache.felix</groupId>
                         <artifactId>maven-bundle-plugin</artifactId>
-                        <version>4.2.1</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <finalName>topword</finalName>
+                            <finalName>services</finalName>
+                            <instructions>
+                                <Bundle-SymbolicName>
+                                    ${module}
+                                </Bundle-SymbolicName>
+                                <Bundle-Name>${module}</Bundle-Name>
+                                <Bundle-Version>${project.version}</Bundle-Version>
+                                <Private-Package>
+                                    ${module}.impl
+                                </Private-Package>
+                                <Import-Package>
+                                    org.osgi.framework,
+                                    org.aidarkhanov.entities,
+                                    ${module}
+                                </Import-Package>
+                                <Export-Package>${module}</Export-Package>
+                                <Service-Component>*</Service-Component>
+                                <_dsannotations>*</_dsannotations>
+                                <!-- Enable processing of OSGI metatype annotations -->
+                                <_metatypeannotations>*</_metatypeannotations>
+                            </instructions>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>statcommand</id>
+            <properties>
+                <module>org.aidarkhanov.commands</module>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.felix</groupId>
+                        <artifactId>maven-bundle-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <finalName>statcommand</finalName>
                             <instructions>
                                 <Bundle-SymbolicName>
                                     ${module}
@@ -75,15 +112,50 @@
                                 <Bundle-Activator>org.aidarkhanov.Activator</Bundle-Activator>
                                 <Bundle-Version>${project.version}</Bundle-Version>
                                 <Import-Package>
-<!--                                    org.stage5.osgi.services,-->
-<!--                                    org.stage5.osgi.commands,-->
                                     org.osgi.framework,
-<!--                                    org.stage5.osgi.entities,-->
-<!--                                    org.stage5.osgi.data-->
+                                    org.aidarkhanov.entities,
+                                    org.aidarkhanov.services,
                                     ${module}
                                 </Import-Package>
-                                <Embed-Dependency>json</Embed-Dependency>
                                 <Export-Package>${module}</Export-Package>
+<!--                                <Private-Package>!org.aidarkhanov.commands</Private-Package>-->
+                                <Service-Component>*</Service-Component>
+                                <_dsannotations>*</_dsannotations>
+                                <!-- Enable processing of OSGI metatype annotations -->
+                                <_metatypeannotations>*</_metatypeannotations>
+                            </instructions>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>entities</id>
+            <properties>
+                <module>org.aidarkhanov.entities</module>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.felix</groupId>
+                        <artifactId>maven-bundle-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <finalName>entities</finalName>
+                            <instructions>
+                                <Bundle-SymbolicName>
+                                    ${module}
+                                </Bundle-SymbolicName>
+                                <Bundle-Name>${module}</Bundle-Name>
+                                <Bundle-Version>${project.version}</Bundle-Version>
+                                <Import-Package>
+                                    org.osgi.framework,
+                                    ${module}
+                                </Import-Package>
+                                <Export-Package>${module}</Export-Package>
+                                <!--                                <Private-Package>!org.aidarkhanov.commands</Private-Package>-->
                                 <Service-Component>*</Service-Component>
                                 <_dsannotations>*</_dsannotations>
                                 <!-- Enable processing of OSGI metatype annotations -->
@@ -98,7 +170,7 @@
         <profile>
             <id>lenta</id>
             <properties>
-                <module>org.stage5.osgi.data.impl.lenta</module>
+                <module>org.aidarkhanov.data.impl.lenta</module>
                 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             </properties>
             <build>
@@ -106,7 +178,6 @@
                     <plugin>
                         <groupId>org.apache.felix</groupId>
                         <artifactId>maven-bundle-plugin</artifactId>
-                        <version>3.3.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <finalName>lenta</finalName>
@@ -117,9 +188,10 @@
                                 <Bundle-Name>${module}</Bundle-Name>
                                 <Bundle-Version>${project.version}</Bundle-Version>
                                 <Import-Package>
-                                    org.stage5.osgi.services, org.json, org.osgi.framework, ${module}
+                                    org.aidarkhanov.services, !org.json, org.osgi.framework, ${module}
                                 </Import-Package>
-                                <Export-Package>org.stage5.osgi.data.impl.lenta</Export-Package>
+                                <Export-Package>org.aidarkhanov.data.impl.lenta</Export-Package>
+                                <Embed-Dependency>json</Embed-Dependency>
                                 <Service-Component>*</Service-Component>
                                 <_dsannotations>*</_dsannotations>
                                 <!-- Enable processing of OSGI metatype annotations -->
@@ -134,7 +206,7 @@
         <profile>
             <id>yandex</id>
             <properties>
-                <module>org.stage5.osgi.data.impl.yandex</module>
+                <module>org.aidarkhanov.data.impl.yandex</module>
                 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             </properties>
             <build>
@@ -142,7 +214,6 @@
                     <plugin>
                         <groupId>org.apache.felix</groupId>
                         <artifactId>maven-bundle-plugin</artifactId>
-                        <version>3.3.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <finalName>yandex</finalName>
@@ -153,9 +224,9 @@
                                 <Bundle-Name>${module}</Bundle-Name>
                                 <Bundle-Version>${project.version}</Bundle-Version>
                                 <Import-Package>
-                                   org.stage5.osgi.services, org.osgi.framework, ${module}
+                                    org.aidarkhanov.services, org.osgi.framework, ${module}
                                 </Import-Package>
-                                <Export-Package>org.stage5.osgi.data.impl.yandex</Export-Package>
+                                <Export-Package>org.aidarkhanov.data.impl.yandex</Export-Package>
                                 <Service-Component>*</Service-Component>
                                 <_dsannotations>*</_dsannotations>
                                 <!-- Enable processing of OSGI metatype annotations -->
@@ -170,7 +241,7 @@
         <profile>
             <id>aif</id>
             <properties>
-                <module>org.stage5.osgi.data.impl.aif</module>
+                <module>org.aidarkhanov.data.impl.aif</module>
                 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             </properties>
             <build>
@@ -178,7 +249,6 @@
                     <plugin>
                         <groupId>org.apache.felix</groupId>
                         <artifactId>maven-bundle-plugin</artifactId>
-                        <version>3.3.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <finalName>aif</finalName>
@@ -189,9 +259,9 @@
                                 <Bundle-Name>${module}</Bundle-Name>
                                 <Bundle-Version>${project.version}</Bundle-Version>
                                 <Import-Package>
-                                    org.stage5.osgi.services, org.osgi.framework, ${module}
+                                    org.aidarkhanov.services, org.osgi.framework, ${module}
                                 </Import-Package>
-                                <Export-Package>${module}</Export-Package>
+                                <Export-Package>org.aidarkhanov.data.impl.aif</Export-Package>
                                 <Service-Component>*</Service-Component>
                                 <_dsannotations>*</_dsannotations>
                                 <!-- Enable processing of OSGI metatype annotations -->
