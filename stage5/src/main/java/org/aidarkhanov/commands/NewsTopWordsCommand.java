@@ -1,27 +1,38 @@
 package org.aidarkhanov.commands;
 
+import org.aidarkhanov.services.impl.TopWordsServiceImpl;
 import org.aidarkhanov.data.DataProvider;
-import org.aidarkhanov.data.impl.AifDataProvider;
-import org.aidarkhanov.data.impl.LentaDataProvider;
-import org.aidarkhanov.data.impl.YandexDataProvider;
+import org.osgi.service.component.annotations.*;
 import org.aidarkhanov.entities.WordEntry;
 import org.aidarkhanov.services.TopWordsService;
-import org.aidarkhanov.services.impl.TopWordsServiceImpl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
+@Component(
+        service = NewsTopWordsCommand.class,
+        immediate = true
+)
 public class NewsTopWordsCommand {
     private static final int TOP_WORD_COUNT = 10;
-
     private final Map<String, DataProvider> providers = new HashMap<>();
+    private DataProvider dataProvider;
 
-    public NewsTopWordsCommand() {
-        providers.put("lenta", new LentaDataProvider());
-        providers.put("aif", new AifDataProvider());
-        providers.put("yandex", new YandexDataProvider());
+    @Reference(
+            service = DataProvider.class,
+            policy = ReferencePolicy.DYNAMIC,
+            bind = "binder",
+            unbind = "unbinder"
+    )
+    protected void binder(DataProvider dataProvider) {
+        this.dataProvider = dataProvider;
+        System.out.println(dataProvider.getName());
+        providers.put(dataProvider.getName(), dataProvider);
+    }
+
+    public void unbinder(DataProvider mediaPortal) {
+        System.out.println("Unbind " + mediaPortal.getName());
+        providers.remove(mediaPortal.getName());
     }
 
     public void stats() {
