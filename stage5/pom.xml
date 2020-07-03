@@ -75,7 +75,6 @@
                                 </Private-Package>
                                 <Import-Package>
                                     org.osgi.framework,
-                                    org.aidarkhanov.entities,
                                     ${module}
                                 </Import-Package>
                                 <Export-Package>${module}</Export-Package>
@@ -109,53 +108,13 @@
                                     ${module}
                                 </Bundle-SymbolicName>
                                 <Bundle-Name>${module}</Bundle-Name>
-                                <Bundle-Activator>org.aidarkhanov.Activator</Bundle-Activator>
                                 <Bundle-Version>${project.version}</Bundle-Version>
                                 <Import-Package>
                                     org.osgi.framework,
-                                    org.aidarkhanov.entities,
                                     org.aidarkhanov.services,
                                     ${module}
                                 </Import-Package>
                                 <Export-Package>${module}</Export-Package>
-<!--                                <Private-Package>!org.aidarkhanov.commands</Private-Package>-->
-                                <Service-Component>*</Service-Component>
-                                <_dsannotations>*</_dsannotations>
-                                <!-- Enable processing of OSGI metatype annotations -->
-                                <_metatypeannotations>*</_metatypeannotations>
-                            </instructions>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>entities</id>
-            <properties>
-                <module>org.aidarkhanov.entities</module>
-                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.felix</groupId>
-                        <artifactId>maven-bundle-plugin</artifactId>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <finalName>entities</finalName>
-                            <instructions>
-                                <Bundle-SymbolicName>
-                                    ${module}
-                                </Bundle-SymbolicName>
-                                <Bundle-Name>${module}</Bundle-Name>
-                                <Bundle-Version>${project.version}</Bundle-Version>
-                                <Import-Package>
-                                    org.osgi.framework,
-                                    ${module}
-                                </Import-Package>
-                                <Export-Package>${module}</Export-Package>
-                                <!--                                <Private-Package>!org.aidarkhanov.commands</Private-Package>-->
                                 <Service-Component>*</Service-Component>
                                 <_dsannotations>*</_dsannotations>
                                 <!-- Enable processing of OSGI metatype annotations -->
@@ -188,10 +147,10 @@
                                 <Bundle-Name>${module}</Bundle-Name>
                                 <Bundle-Version>${project.version}</Bundle-Version>
                                 <Import-Package>
-                                    org.aidarkhanov.services, !org.json, org.osgi.framework, ${module}
+                                    org.aidarkhanov.services, org.json, org.osgi.framework, ${module}
                                 </Import-Package>
                                 <Export-Package>org.aidarkhanov.data.impl.lenta</Export-Package>
-                                <Embed-Dependency>json</Embed-Dependency>
+<!--                                <Embed-Dependency>json</Embed-Dependency>-->
                                 <Service-Component>*</Service-Component>
                                 <_dsannotations>*</_dsannotations>
                                 <!-- Enable processing of OSGI metatype annotations -->

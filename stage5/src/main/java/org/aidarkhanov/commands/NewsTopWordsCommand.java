@@ -4,8 +4,10 @@ import org.aidarkhanov.data.DataProvider;
 import org.aidarkhanov.entities.WordEntry;
 import org.aidarkhanov.services.TopWordsService;
 import org.aidarkhanov.services.impl.TopWordsServiceImpl;
+import org.apache.felix.service.command.CommandProcessor;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
 
 import java.util.HashMap;
@@ -15,11 +17,11 @@ import java.util.Map;
 
 @Component(
         service = NewsTopWordsCommand.class,
-        immediate = true
-//        property = {
-//                CommandProcessor.COMMAND_SCOPE + ":String=news",
-//                CommandProcessor.COMMAND_FUNCTION + ":String=stats"
-//        }
+        immediate = true,
+        property = {
+                CommandProcessor.COMMAND_SCOPE + ":String=news",
+                CommandProcessor.COMMAND_FUNCTION + ":String=stats"
+        }
 )
 public class NewsTopWordsCommand {
     private static final int TOP_WORD_COUNT = 10;
@@ -28,6 +30,7 @@ public class NewsTopWordsCommand {
 
     @Reference(
             service = DataProvider.class,
+            cardinality = ReferenceCardinality.MULTIPLE,
             policy = ReferencePolicy.DYNAMIC,
             bind = "binder",
             unbind = "unbinder"
